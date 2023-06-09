@@ -10,6 +10,7 @@ import CoreData
 class DataController: ObservableObject {
     let container: NSPersistentCloudKitContainer
     @Published var selectedFilter: Filter? = Filter.all
+    @Published var selectedIssue : Issue?
     
     
     static var preview:DataController = {
@@ -28,12 +29,20 @@ class DataController: ObservableObject {
             container.persistentStoreDescriptions.first?.url = URL(string: "/dev/null")
             
         }
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        container.persistentStoreDescriptions.first?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+        NotificationCenter.default.addObserver(forName: .NSPersistentStoreRemoteChange, object: container.persistentStoreCoordinator, queue: .main, using: remoteStoreChanged)
         container.loadPersistentStores{ storeDescription , error in
             if let error {
                 fatalError("fatal error loading store:\(error.localizedDescription)")
             }
             
         }
+    }
+    func remoteStoreChanged(_ notification:Notification){
+        objectWillChange.send()
+        
     }
     
     func createSampleData(){
@@ -50,6 +59,7 @@ class DataController: ObservableObject {
                 issue.creationDate = .now
                 issue.completed = Bool.random()
                 issue.priority = Int16.random(in: 0...2)
+                tag.addToIssues(issue)
             }
         }
         try? viewContext.save()
@@ -88,6 +98,15 @@ class DataController: ObservableObject {
         delete(request2)
         
         save()
+    }
+    func missingTags(from issue: Issue) -> [Tag] {
+        let request = Tag.fetchRequest()
+        let allTags = (try? container.viewContext.fetch(request)) ?? []
+
+        let allTagsSet = Set(allTags)
+        let difference = allTagsSet.symmetricDifference(issue.issueTags)
+
+        return difference.sorted()
     }
         
 }
