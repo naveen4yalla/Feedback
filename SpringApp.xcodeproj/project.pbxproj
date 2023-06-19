@@ -10,7 +10,6 @@
 		6D01EEEC2A1D8AC1001B2836 /* Issue-CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01EEEB2A1D8AC1001B2836 /* Issue-CoreDataHelper.swift */; };
 		6D01EEEE2A1D9965001B2836 /* Tag-CoreDatahelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D01EEED2A1D9965001B2836 /* Tag-CoreDatahelper.swift */; };
 		6DA7E8A82A0CD4230021DBBA /* SpringAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7E8A72A0CD4230021DBBA /* SpringAppApp.swift */; };
-		6DA7E8AA2A0CD4230021DBBA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7E8A92A0CD4230021DBBA /* ContentView.swift */; };
 		6DA7E8AC2A0CD4240021DBBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DA7E8AB2A0CD4240021DBBA /* Assets.xcassets */; };
 		6DA7E8B02A0CD4240021DBBA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DA7E8AF2A0CD4240021DBBA /* Preview Assets.xcassets */; };
 		6DA7E8B82A0CD6FD0021DBBA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7E8B62A0CD6FD0021DBBA /* Model.xcdatamodeld */; };
@@ -18,9 +17,15 @@
 		6DA7E8BE2A0D03CE0021DBBA /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7E8BD2A0D03CE0021DBBA /* SidebarView.swift */; };
 		6DA7E8C02A0D03E10021DBBA /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7E8BF2A0D03E10021DBBA /* DetailView.swift */; };
 		6DA7E8C42A0D07A30021DBBA /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA7E8C32A0D07A30021DBBA /* Filter.swift */; };
+		6DC3A7832A331C0D00558D3E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC3A7822A331C0D00558D3E /* ContentView.swift */; };
 		6DD65A052A21E0EB0023162A /* IssueRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD65A042A21E0EB0023162A /* IssueRow.swift */; };
 		6DDD20DC2A32808A0002C00C /* IssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDD20DB2A32808A0002C00C /* IssueView.swift */; };
 		6DDD20DE2A32809C0002C00C /* NoIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDD20DD2A32809C0002C00C /* NoIssueView.swift */; };
+		6DE8FBE32A4001DE00F117B6 /* Bundle-decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE8FBE22A4001DE00F117B6 /* Bundle-decodable.swift */; };
+		6DE8FBE52A4009A500F117B6 /* AwardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE8FBE42A4009A500F117B6 /* AwardsView.swift */; };
+		6DE8FBE72A400A6000F117B6 /* Award.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE8FBE62A400A6000F117B6 /* Award.swift */; };
+		6DE8FBEA2A400D7200F117B6 /* Awards.json in Resources */ = {isa = PBXBuildFile; fileRef = 6DE8FBE82A400D7200F117B6 /* Awards.json */; };
+		6DE8FBEB2A400D7200F117B6 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DE8FBE92A400D7200F117B6 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +33,6 @@
 		6D01EEED2A1D9965001B2836 /* Tag-CoreDatahelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tag-CoreDatahelper.swift"; sourceTree = "<group>"; };
 		6DA7E8A42A0CD4230021DBBA /* SpringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA7E8A72A0CD4230021DBBA /* SpringAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpringAppApp.swift; sourceTree = "<group>"; };
-		6DA7E8A92A0CD4230021DBBA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6DA7E8AB2A0CD4240021DBBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DA7E8AD2A0CD4240021DBBA /* SpringApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpringApp.entitlements; sourceTree = "<group>"; };
 		6DA7E8AF2A0CD4240021DBBA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -38,9 +42,15 @@
 		6DA7E8BD2A0D03CE0021DBBA /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		6DA7E8BF2A0D03E10021DBBA /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		6DA7E8C32A0D07A30021DBBA /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		6DC3A7822A331C0D00558D3E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6DD65A042A21E0EB0023162A /* IssueRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueRow.swift; sourceTree = "<group>"; };
 		6DDD20DB2A32808A0002C00C /* IssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueView.swift; sourceTree = "<group>"; };
 		6DDD20DD2A32809C0002C00C /* NoIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoIssueView.swift; sourceTree = "<group>"; };
+		6DE8FBE22A4001DE00F117B6 /* Bundle-decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-decodable.swift"; sourceTree = "<group>"; };
+		6DE8FBE42A4009A500F117B6 /* AwardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwardsView.swift; sourceTree = "<group>"; };
+		6DE8FBE62A400A6000F117B6 /* Award.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Award.swift; sourceTree = "<group>"; };
+		6DE8FBE82A400D7200F117B6 /* Awards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Awards.json; sourceTree = "<group>"; };
+		6DE8FBE92A400D7200F117B6 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +69,7 @@
 			children = (
 				6D01EEEB2A1D8AC1001B2836 /* Issue-CoreDataHelper.swift */,
 				6D01EEED2A1D9965001B2836 /* Tag-CoreDatahelper.swift */,
+				6DE8FBE22A4001DE00F117B6 /* Bundle-decodable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -84,6 +95,8 @@
 		6DA7E8A62A0CD4230021DBBA /* SpringApp */ = {
 			isa = PBXGroup;
 			children = (
+				6DE8FBE82A400D7200F117B6 /* Awards.json */,
+				6DE8FBE92A400D7200F117B6 /* Colors.xcassets */,
 				6DA7E8BC2A0CF1840021DBBA /* Info.plist */,
 				6DA7E8A72A0CD4230021DBBA /* SpringAppApp.swift */,
 				6DA7E8AB2A0CD4240021DBBA /* Assets.xcassets */,
@@ -116,6 +129,7 @@
 				6D01EEEA2A1D8A9A001B2836 /* Extensions */,
 				6DA7E8C22A0D07830021DBBA /* MainScreens */,
 				6DA7E8C32A0D07A30021DBBA /* Filter.swift */,
+				6DE8FBE62A400A6000F117B6 /* Award.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -125,10 +139,11 @@
 			children = (
 				6DA7E8BD2A0D03CE0021DBBA /* SidebarView.swift */,
 				6DA7E8BF2A0D03E10021DBBA /* DetailView.swift */,
-				6DA7E8A92A0CD4230021DBBA /* ContentView.swift */,
 				6DD65A042A21E0EB0023162A /* IssueRow.swift */,
 				6DDD20DB2A32808A0002C00C /* IssueView.swift */,
 				6DDD20DD2A32809C0002C00C /* NoIssueView.swift */,
+				6DC3A7822A331C0D00558D3E /* ContentView.swift */,
+				6DE8FBE42A4009A500F117B6 /* AwardsView.swift */,
 			);
 			path = MainScreens;
 			sourceTree = "<group>";
@@ -197,6 +212,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DA7E8B02A0CD4240021DBBA /* Preview Assets.xcassets in Resources */,
+				6DE8FBEB2A400D7200F117B6 /* Colors.xcassets in Resources */,
+				6DE8FBEA2A400D7200F117B6 /* Awards.json in Resources */,
 				6DA7E8AC2A0CD4240021DBBA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,16 +226,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DA7E8C42A0D07A30021DBBA /* Filter.swift in Sources */,
-				6DA7E8AA2A0CD4230021DBBA /* ContentView.swift in Sources */,
 				6DA7E8C02A0D03E10021DBBA /* DetailView.swift in Sources */,
+				6DC3A7832A331C0D00558D3E /* ContentView.swift in Sources */,
 				6DA7E8BB2A0CDAA30021DBBA /* DataController.swift in Sources */,
 				6D01EEEE2A1D9965001B2836 /* Tag-CoreDatahelper.swift in Sources */,
 				6DA7E8BE2A0D03CE0021DBBA /* SidebarView.swift in Sources */,
+				6DE8FBE52A4009A500F117B6 /* AwardsView.swift in Sources */,
 				6DA7E8A82A0CD4230021DBBA /* SpringAppApp.swift in Sources */,
+				6DE8FBE32A4001DE00F117B6 /* Bundle-decodable.swift in Sources */,
 				6D01EEEC2A1D8AC1001B2836 /* Issue-CoreDataHelper.swift in Sources */,
 				6DDD20DC2A32808A0002C00C /* IssueView.swift in Sources */,
 				6DDD20DE2A32809C0002C00C /* NoIssueView.swift in Sources */,
 				6DD65A052A21E0EB0023162A /* IssueRow.swift in Sources */,
+				6DE8FBE72A400A6000F117B6 /* Award.swift in Sources */,
 				6DA7E8B82A0CD6FD0021DBBA /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

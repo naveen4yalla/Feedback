@@ -11,7 +11,17 @@ class DataController: ObservableObject {
     let container: NSPersistentCloudKitContainer
     @Published var selectedFilter: Filter? = Filter.all
     @Published var selectedIssue : Issue?
+    @Published var filterText = ""
+    @Published var filterTokens = [Tag]()
+    private var saveTask: Task<Void, Error>?
     
+  
+    
+    @Published var filterEnabled = false
+    @Published var filterPriority = -1
+    @Published var filterStatus = Status.all
+    @Published var sortType = SortType.dateCreated
+    @Published var sortNewestFirst = true
     
     static var preview:DataController = {
         let dataController = DataController(inMemory: true)
@@ -70,6 +80,18 @@ class DataController: ObservableObject {
             try? container.viewContext.save()
         }
     }
+    
+    func queueSave(){
+        //allows us to cancel the task first if another change comes in, making sure that any existing queued save doesn’t happen.
+        saveTask?.cancel()
+        saveTask = Task { @MainActor in
+            try await Task.sleep(for: .seconds(3))
+            save()
+        }
+        
+    }
+    
+    
     func delete(_ object: NSManagedObject){
         objectWillChange.send()
         container.viewContext.delete(object)
@@ -108,5 +130,93 @@ class DataController: ObservableObject {
 
         return difference.sorted()
     }
+    func issueForSelectedFilter() -> [Issue] {
         
+        let filter = selectedFilter ?? .all
+            var predicates = [NSPredicate]()
+
+            if let tag = filter.tag {
+                let tagPredicate = NSPredicate(format: "tags CONTAINS %@", tag)
+                predicates.append(tagPredicate)
+            } else {
+                let datePredicate = NSPredicate(format: "modificationDate > %@", filter.minModificationDate as NSDate)
+                predicates.append(datePredicate)
+            }
+        let trimmedFilterText = filterText.trimmingCharacters(in: .whitespaces)
+
+        if trimmedFilterText.isEmpty == false {
+            let titlePredicate = NSPredicate(format: "title CONTAINS[c] %@", trimmedFilterText)
+            let contentPredicate = NSPredicate(format: "content CONTAINS[c] %@", trimmedFilterText)
+            let combinedPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, contentPredicate])
+            predicates.append(combinedPredicate)
+        }
+        if filterTokens.isEmpty == false {
+            for filterToken in filterTokens {
+                let tokenPredicate = NSPredicate(format: "tags CONTAINS %@", filterToken)
+                predicates.append(tokenPredicate)
+            }
+        }
+        if filterEnabled {
+            if filterPriority >= 0 {
+                let priorityFilter = NSPredicate(format: "priority = %d", filterPriority)
+                predicates.append(priorityFilter)
+            }
+
+            if filterStatus != .all {
+                let lookForClosed = filterStatus == .closed
+                let statusFilter = NSPredicate(format: "completed = %@", NSNumber(value: lookForClosed))
+                predicates.append(statusFilter)
+            }
+        }
+            let request = Issue.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: sortType.rawValue, ascending: sortNewestFirst)]
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+           
+            let allIssues = (try? container.viewContext.fetch(request)) ?? []
+            return allIssues.sorted()
+        }
+    var suggestedFilterTokens: [Tag] {
+        guard filterText.starts(with: "#") else {
+            return []
+        }
+      
+        let trimmedFilterText = String(filterText.dropFirst()).trimmingCharacters(in: .whitespaces)
+        
+        let request = Tag.fetchRequest()
+
+        if trimmedFilterText.isEmpty == false {
+            request.predicate = NSPredicate(format: "name CONTAINS[c] %@", trimmedFilterText)
+        }
+
+        return (try? container.viewContext.fetch(request).sorted()) ?? []
+    }
+ 
+    func newIssue() {
+        let issue = Issue(context: container.viewContext)
+        issue.title = "New issue"
+        issue.creationDate = .now
+        issue.priority = 1
+        if let tag = selectedFilter?.tag {
+            issue.addToTags(tag)
+        }
+        save()
+        selectedIssue = issue
+    }
+    func newTag() {
+        let tag = Tag(context: container.viewContext)
+        tag.id = UUID()
+        tag.name = "New tag"
+        save()
+    }
+    
+    
+    
+}
+enum SortType:String {
+    case dateCreated = "creationDate"
+    case dateModified = "modificationDate"
+}
+
+enum Status {
+    case all,open,closed
 }

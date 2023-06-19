@@ -10,6 +10,9 @@ import SwiftUI
 struct IssueView: View {
     @ObservedObject var issue: Issue
     @EnvironmentObject var dataController: DataController
+    
+    // If the user makes a change to an issue then very quickly brings up multitasking and exits the app, we need to make sure their data is definitely safe rather than waiting a few seconds for the sleep to finish.
+    @Environment(\.scenePhase) var scenePhase
     var body: some View {
         Form {
             Section {
@@ -72,6 +75,17 @@ struct IssueView: View {
                 }
             }
         }.disabled(issue.isDeleted)
+//However, that won’t actually fire at all – yes, the values inside the issue might change, but the actual issue object is staying the same and so onChange() won’t do anything.
+
+//Instead of that, we need to use onReceive() to watch for the issue announcing changes using @Published. If you remember, @Published internally calls the objectWillChange publisher that comes built into any class that conforms to ObservableObject. So, we can use onReceive() to watch that for announcements, and call queueSave() whenever a change notification comes in.
+        .onReceive(issue.objectWillChange) { _ in
+                dataController.queueSave()
+            }
+        .onChange(of: scenePhase) { phase in
+            if phase != .active {
+                dataController.save()
+            }
+        }
     }
 }
 
