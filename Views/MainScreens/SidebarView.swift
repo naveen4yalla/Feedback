@@ -43,12 +43,17 @@ struct SidebarView: View {
                     NavigationLink(value: filter) {
                         Label(filter.name,systemImage: filter.icon)
                             .badge(filter.tag?.tagActiveIssues.count ?? 5)
-                                //filter.tag?.tagActiveIssues.count ?? 5)
+                        //filter.tag?.tagActiveIssues.count ?? 5)
                             .contextMenu {
                                 Button {
                                     rename(filter)
                                 } label: {
                                     Label("Rename", systemImage: "pencil")
+                                }
+                                Button(role: .destructive) {
+                                    delete(filter)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
                                 }
                             }
                     }
@@ -56,8 +61,9 @@ struct SidebarView: View {
                 .onDelete(perform: delete)
             }
         }
+        .sheet(isPresented: $showingAwards, content: AwardsView.init)
         .toolbar{
-           #if DEBUG
+#if DEBUG
             Button{
                 dataController.deleteAll()
                 dataController.createSampleData()
@@ -65,7 +71,7 @@ struct SidebarView: View {
         label:{
             Label("Add Samples", systemImage: "flame")
         }
-           #endif
+#endif
             Button(action: dataController.newTag) {
                 Label("Add tag", systemImage: "plus")
             }
@@ -79,7 +85,7 @@ struct SidebarView: View {
             Button("Cancel", role: .cancel) { }
             TextField("New name", text: $tagName)
         }
-        .sheet(isPresented: $showingAwards, content: AwardsView.init)
+        
     }
     func delete(_ offsets: IndexSet) {
         for offset in offsets {
@@ -94,6 +100,11 @@ struct SidebarView: View {
     }
     func completeRename() {
         tagToRename?.name = tagName
+        dataController.save()
+    }
+    func delete(_ filter: Filter) {
+        guard let tag = filter.tag else { return }
+        dataController.delete(tag)
         dataController.save()
     }
 }
