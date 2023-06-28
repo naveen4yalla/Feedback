@@ -24,4 +24,7 @@ struct Filter:Identifiable, Hashable {
         lhs.id == rhs.id
         
     }
+    var activeIssuesCount: Int {
+        tag?.tagActiveIssues.count ?? 0
+    }
 }

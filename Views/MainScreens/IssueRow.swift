@@ -26,15 +26,16 @@ struct IssueRow: View {
                 }
                 Spacer()
                 VStack(alignment:. trailing){
-                    Text(issue.issueCreationDate.formatted(date:.numeric,time: .omitted))
-                        .font(.subheadline)
+                    Text(issue.issueFormattedCreationDate)
+                        .accessibilityLabel(issue.issueCreationDate.formatted(date: .abbreviated, time: .omitted))
+                           .font(.subheadline)
                     if issue.completed{
                         Text("Closed")
                             .font(.body.smallCaps())
                     }
                 }.foregroundStyle(.secondary)
             }
-        }
+        }.accessibilityHint(issue.priority == 2 ? "High priority" : "")
     }
 }
 

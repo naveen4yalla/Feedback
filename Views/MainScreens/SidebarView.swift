@@ -23,7 +23,7 @@ struct SidebarView: View {
     @State private var tagName = ""
     
     
-    
+   
     @State private var showingAwards = false
     
     var body: some View {
@@ -31,7 +31,7 @@ struct SidebarView: View {
             Section("Smart Filters"){
                 ForEach(smartFilters) { filter in
                     NavigationLink(value:filter) {
-                        Label(filter.name,systemImage: filter.icon)
+                        Label(LocalizedStringKey(filter.name), systemImage: filter.icon)
                     }
                 }
                 
@@ -42,7 +42,7 @@ struct SidebarView: View {
                 ForEach(tagsFilters) { filter in
                     NavigationLink(value: filter) {
                         Label(filter.name,systemImage: filter.icon)
-                            .badge(filter.tag?.tagActiveIssues.count ?? 5)
+                            .badge(filter.activeIssuesCount)
                         //filter.tag?.tagActiveIssues.count ?? 5)
                             .contextMenu {
                                 Button {
@@ -56,6 +56,11 @@ struct SidebarView: View {
                                     Label("Delete", systemImage: "trash")
                                 }
                             }
+                            .accessibilityElement()
+                            .accessibilityLabel(filter.name)
+                        //That uses automatic grammar agreement, which is a feature from Apple’s Foundation framework that will automatically adjust “issue” to be “issues” when there is anything other than 1 issue.
+
+                            .accessibilityHint("\(filter.activeIssuesCount) issues")
                     }
                 }
                 .onDelete(perform: delete)
