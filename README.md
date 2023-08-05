@@ -1,2 +1,3 @@
 # Feedback
-This is  a APPLE FEEDBACK Assistant CLONE
+This is  an APPLE FEEDBACK Assistant clone
+
